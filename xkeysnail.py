@@ -24,10 +24,9 @@ define_keymap(lambda wm_class: wm_class not in ["Alacritty", "kitty", "konsole",
     # Additional common macOS shortcuts
     K("Super-z"): K("Ctrl-z"),        # Undo
     K("Super-Shift-z"): K("Ctrl-Shift-z"),  # Redo
-    K("Super-f"): K("Ctrl-f"),        # Find
     K("Super-s"): K("Ctrl-s"),        # Save
     K("Super-t"): K("Ctrl-t"),        # New tab
     K("Super-n"): K("Ctrl-n"),        # New window
     K("Super-w"): K("Ctrl-w"),        # Close tab/window
-    # Super+Q left for i3 WM (kill window)
+    # Super+F and Super+Q left for i3 WM (fullscreen, kill window)
 }, "macOS-like keybindings - non-terminals")
