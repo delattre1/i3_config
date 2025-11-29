@@ -4,11 +4,17 @@
 import re
 from xkeysnail.transform import *
 
-# Define macOS-like keybindings using Super (Command) key for ALL applications
-# Note: Some i3 WM keybindings may be overridden (like Super+Q, Super+W)
-# Adjust as needed in your i3 config to use different keys for WM functions
+# Define macOS-like keybindings using Super (Command) key
+# Smart terminal handling: Ctrl+Shift+C/V in terminals, Ctrl+C/V elsewhere
 
-define_keymap(None, {
+# Terminal applications (use Ctrl+Shift+C/V for copy/paste to avoid Ctrl+C killing processes)
+define_keymap(re.compile("Alacritty|kitty|konsole|gnome-terminal|terminator|xterm|urxvt"), {
+    K("Super-c"): K("Ctrl-Shift-c"),  # Copy in terminal
+    K("Super-v"): K("Ctrl-Shift-v"),  # Paste in terminal
+}, "macOS-like keybindings - terminals")
+
+# All other applications (use regular Ctrl shortcuts)
+define_keymap(lambda wm_class: wm_class not in ["Alacritty", "kitty", "konsole", "gnome-terminal", "terminator", "xterm", "urxvt"], {
     # Core macOS shortcuts - Copy, Paste, Select All, Cut
     K("Super-c"): K("Ctrl-c"),
     K("Super-v"): K("Ctrl-v"),
@@ -24,4 +30,4 @@ define_keymap(None, {
     K("Super-n"): K("Ctrl-n"),        # New window
     K("Super-w"): K("Ctrl-w"),        # Close tab/window
     # Super+Q left for i3 WM (kill window)
-}, "macOS-like keybindings - system wide")
+}, "macOS-like keybindings - non-terminals")
