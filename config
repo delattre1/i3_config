@@ -176,6 +176,7 @@ hide_edge_borders smart
 bar {
     status_command i3status
     position top
+    modifier none
 
     colors {
         background #000000
